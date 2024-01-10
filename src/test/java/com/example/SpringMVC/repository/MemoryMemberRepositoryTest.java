@@ -3,11 +3,19 @@ package com.example.SpringMVC.repository;
 import static org.assertj.core.api.Assertions.*;
 
 import com.example.SpringMVC.domain.Member;
+import java.util.List;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 class MemoryMemberRepositoryTest {
-    MemberRepository repository = new MemoryMemberRepository();
+    MemoryMemberRepository repository = new MemoryMemberRepository();
+
+    @AfterEach
+    public void afterEach() {
+        repository.clearStore();
+
+    }
 
     @Test
     public void save() {
@@ -19,5 +27,37 @@ class MemoryMemberRepositoryTest {
 
         Member result = repository.findById(member.getId()).get();
         assertThat(result).isEqualTo(member);
+    }
+
+    @Test
+    public void findByname() {
+        Member member1 = new Member();
+
+        member1.setName("최동훈");
+        repository.save(member1);
+
+        //shift F6 하면 rename 가능함.
+        Member member2 = new Member();
+        member2.setName("최동훈1");
+        repository.save(member2);
+
+        Member result = repository.findByName("최동훈").get();
+
+        assertThat(result).isEqualTo(member1);
+    }
+
+    @Test
+    public void findAll() {
+        Member member1 = new Member();
+        member1.setName("최동훈");
+        repository.save(member1);
+
+        Member member2 = new Member();
+        member2.setName("최동훈");
+        repository.save(member2);
+
+        List<Member> all = repository.findAll();
+
+        assertThat(all.size()).isEqualTo(2);
     }
 }
