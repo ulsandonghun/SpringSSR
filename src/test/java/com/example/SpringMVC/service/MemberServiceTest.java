@@ -17,7 +17,7 @@ class MemberServiceTest {
 
     @BeforeEach
     public void setDB() {
-        memberRepository=new MemoryMemberRepository()
+        memberRepository=new MemoryMemberRepository();
         memberService = new MemberService(memberRepository);
     }
 

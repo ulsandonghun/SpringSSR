@@ -5,11 +5,14 @@ import com.example.SpringMVC.repository.MemberRepository;
 import com.example.SpringMVC.repository.MemoryMemberRepository;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.stereotype.Service;
 
+@Service
 public class MemberService {
 
     private final MemberRepository memberRepository;
-
+    //이렇게 클래스가 직접 repository를 생성하는게 아니라 외부에서 주입받는것을
+    //의존 주입 이라고 합.
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository=memberRepository;
     }
