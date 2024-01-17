@@ -31,6 +31,8 @@ public class MemberController {
 
     @PostMapping(value = "/members/new")
     public String create(MemberForm form) {
+        //스프링이 Post로 날라온 값 중 Name 이라는 키에 해당하는 값을
+        //파라미터의 form의 같은 프로퍼티의 값으로 넣어줌.
         Member member = new Member();
         member.setName(form.getName());
         memberService.join(member);
