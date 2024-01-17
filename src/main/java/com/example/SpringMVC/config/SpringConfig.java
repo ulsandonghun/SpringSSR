@@ -15,25 +15,29 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class SpringConfig {
-    private EntityManager entityManager;
+    private final MemberRepository memberRepository;
 
     @Autowired
-    public SpringConfig(EntityManager entityManager) {
-        this.entityManager = entityManager;
+    //생성자가 하나인 경우는 Autowired 생략 가능.
+    public SpringConfig(MemberRepository memberRepository) {
+        //의문점 ? spring Data JPA 는등록이 되지 않았는데 ?
+        //extends로 JPArepository<>를 상속하면 스프링이 알아서 구현해서 빈으로 등록 해준다.
+
+        this.memberRepository = memberRepository;
     }
 
     @Bean
     public MemberService memberService() {
-        return new MemberService(memberRepository());
+        return new MemberService(memberRepository);
 
     }
 
-    @Bean
-    public MemberRepository memberRepository() {
-//        return new MemoryMemberRepository();
-//        return new JdbcMemberRepository(dataSource);
-
-//        return new JdbcTemplateMemberRepository(dataSource);
-        return new JpaMemberRepository(entityManager);
-    }
+//    @Bean
+//    public MemberRepository memberRepository() {
+////        return new MemoryMemberRepository();
+////        return new JdbcMemberRepository(dataSource);
+//
+////        return new JdbcTemplateMemberRepository(dataSource);
+////        return new JpaMemberRepository(entityManager);
+//    }
 }

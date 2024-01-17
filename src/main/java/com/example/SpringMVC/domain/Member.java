@@ -16,6 +16,8 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    //공통화할수 없는 아래의 필드 ex)name 이나 다른 비즈니스로직으로 username 동
+    //다 다르기 때문에 JPARepository<>에서 새롭게 구현해 줘야 한다.
     private String name;
 
 }
