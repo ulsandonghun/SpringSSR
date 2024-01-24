@@ -1,5 +1,6 @@
 package com.example.SpringMVC.config;
 
+import com.example.SpringMVC.aop.TimeTraceAop;
 import com.example.SpringMVC.repository.JdbcMemberRepository;
 import com.example.SpringMVC.repository.JdbcTemplateMemberRepository;
 import com.example.SpringMVC.repository.JpaMemberRepository;

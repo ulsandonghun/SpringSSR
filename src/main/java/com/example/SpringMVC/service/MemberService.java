@@ -11,35 +11,29 @@ import org.springframework.stereotype.Service;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+
     //이렇게 클래스가 직접 repository를 생성하는게 아니라 외부에서 주입받는것을
     //의존 주입 이라고 합.
     @Autowired
     public MemberService(MemberRepository memberRepository) {
-        this.memberRepository=memberRepository;
+        this.memberRepository = memberRepository;
     }
+
     /**
      * 회원 가입
      *
      * @return
      */
     public Long join(Member member) {
-        long start = System.currentTimeMillis();
 
+        //중복회원 불가
+        validateDuplicateMember(member);
+        //중복회원 검증
+        //orElseGet 사용
 
-        try{
+        memberRepository.save(member);
+        return member.getId();
 
-            //중복회원 불가
-            validateDuplicateMember(member);
-            //중복회원 검증
-            //orElseGet 사용
-
-            memberRepository.save(member);
-            return member.getId();
-        }finally {
-            long finish = System.currentTimeMillis();
-            long timeMs = finish - start;
-            System.out.println("join : timeMs = " + timeMs);
-        }
     }
 
     private void validateDuplicateMember(Member member) {
@@ -52,15 +46,9 @@ public class MemberService {
     }
 
     public List<Member> findMembers() {
-        long start = System.currentTimeMillis();
-        try{
 
-            return memberRepository.findAll();
-        }finally {
-            long finish = System.currentTimeMillis();
-            long time = finish - start;
-            System.out.println("find members time = " + time);
-        }
+        return memberRepository.findAll();
+
     }
 
     public Optional<Member> findOne(Long memberId) {
