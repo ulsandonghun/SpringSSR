@@ -27,6 +27,8 @@ public class Order {
                 ", itemName='" + itemName + '\'' +
                 ", itemPrice=" + itemPrice +
                 ", discountPrice=" + discountPrice +
-                '}';
+                '}'
+                +"\n"
+                +"order.calculatePrice="+String.valueOf(itemPrice-discountPrice);
     }
 }
