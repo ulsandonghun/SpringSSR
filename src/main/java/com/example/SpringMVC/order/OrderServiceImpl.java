@@ -2,13 +2,16 @@ package com.example.SpringMVC.order;
 
 import com.example.SpringMVC.discount.DiscountPolicy;
 import com.example.SpringMVC.discount.FixDiscountPolicy;
+import com.example.SpringMVC.discount.RateDiscountPolicy;
 import com.example.SpringMVC.member.Member;
 import com.example.SpringMVC.member.MemberRepository;
 import com.example.SpringMVC.member.MemoryMemberReposotiry;
 
 public class OrderServiceImpl implements OrderService{
     private  final MemberRepository memberRepository = new MemoryMemberReposotiry();
-    private  final DiscountPolicy discountPolicy = new FixDiscountPolicy();
+//    private  final DiscountPolicy discountPolicy = new FixDiscountPolicy();
+    private final DiscountPolicy discountPolicy=new RateDiscountPolicy();
+
 
 
     @Override
