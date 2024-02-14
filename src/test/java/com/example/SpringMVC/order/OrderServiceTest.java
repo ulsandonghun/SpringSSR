@@ -8,15 +8,23 @@ import com.example.SpringMVC.member.MemberRepository;
 import com.example.SpringMVC.member.MemberService;
 import com.example.SpringMVC.member.MemberServiceImpl;
 import com.example.SpringMVC.member.MemoryMemberReposotiry;
+import net.bytebuddy.asm.MemberSubstitution.Argument;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class OrderServiceTest {
 
-    private final OrderService orderService = new OrderServiceImpl();
-    private final MemberService memberService = new MemberServiceImpl();
+    private  OrderService orderService ;
+    private MemberService memberService ;
 
-    private final MemberRepository memberRepository = new MemoryMemberReposotiry();
+    @BeforeEach
+    public void beforeEach() {
+        AppConfig appConfig = new AppConfig();
+        this.orderService= appConfig.orderService();
+        this.memberService= appConfig.memberService();
+    }
+
 
     @Test
     public void orderCreate() {

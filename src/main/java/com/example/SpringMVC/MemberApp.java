@@ -5,11 +5,14 @@ import com.example.SpringMVC.member.Member;
 import com.example.SpringMVC.member.MemberService;
 import com.example.SpringMVC.member.MemberServiceImpl;
 import com.example.SpringMVC.order.AppConfig;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class MemberApp {
     public static void main(String[] args) {
-        AppConfig appConfig = new AppConfig();
-        MemberService memberService = appConfig.memberService();
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+
+        MemberService memberService = context.getBean("memberService", MemberService.class);
+
 
         Member member = new Member(1L, "memberA", Grade.VIP);
         memberService.join(member);

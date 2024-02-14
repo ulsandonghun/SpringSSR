@@ -8,14 +8,17 @@ import com.example.SpringMVC.order.AppConfig;
 import com.example.SpringMVC.order.Order;
 import com.example.SpringMVC.order.OrderService;
 import com.example.SpringMVC.order.OrderServiceImpl;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class OrderApp {
     public static void main(String[] args) {
 
-        AppConfig appConfig = new AppConfig();
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
-        MemberService memberService = appConfig.memberService();
-        OrderService orderService = appConfig.orderService();
+        MemberService memberService = context.getBean("memberService", MemberService.class);
+
+        OrderService orderService = context.getBean("orderService", OrderService.class);
+
 
         Long memberId=1L;
         Member member = new Member(memberId, "최동훈", Grade.VIP);

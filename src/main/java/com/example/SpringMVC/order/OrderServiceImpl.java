@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 
 public class OrderServiceImpl implements OrderService{
     private   MemberRepository memberRepository;
-//    private  final DiscountPolicy discountPolicy = new FixDiscountPolicy();
     private  DiscountPolicy discountPolicy;
 
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
