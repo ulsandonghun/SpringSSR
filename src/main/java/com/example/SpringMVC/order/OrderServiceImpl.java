@@ -10,7 +10,7 @@ import com.example.SpringMVC.member.MemoryMemberReposotiry;
 public class OrderServiceImpl implements OrderService{
     private  final MemberRepository memberRepository = new MemoryMemberReposotiry();
 //    private  final DiscountPolicy discountPolicy = new FixDiscountPolicy();
-    private final DiscountPolicy discountPolicy=new RateDiscountPolicy();
+    private  DiscountPolicy discountPolicy;
 
 
 
